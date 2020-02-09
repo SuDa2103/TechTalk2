@@ -10,10 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_09_190447) do
+ActiveRecord::Schema.define(version: 2020_02_09_203511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "communities", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "name"
+    t.string "url"
+    t.integer "total_members"
+    t.text "rules"
+    t.index ["user_id"], name: "index_communities_on_user_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "community_id"
+    t.string "title"
+    t.text "body"
+    t.integer "upvotes", default: 0
+    t.integer "downvotes", default: 0
+    t.integer "total_comments", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["community_id"], name: "index_posts_on_community_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "first_name"
