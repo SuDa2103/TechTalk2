@@ -2,10 +2,14 @@
   <div class="row">
     <div class="col-12 pt-3 pb-3 mb-4 border-bottom">
       <div class="float-right">
+        <% if user_signed_in? %>
+          <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-outline-primary" %>
+        <% else %>
         <%= link_to "Log In", new_user_session_path, class: "btn btn-outline-primary" %>
         <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-outline-primary" %>
+        <% end %>
       </div>
-      <p class="h3"> TechTalk</p>
+      <p class="h3"> <%= link_to "TechTalk", root_path  %></p>
     </div>
   </div>
 </div>
