@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_10_230226) do
+ActiveRecord::Schema.define(version: 2020_02_11_000540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2020_02_10_230226) do
     t.string "url"
     t.integer "total_members"
     t.text "rules"
+    t.string "summary"
     t.index ["user_id"], name: "index_communities_on_user_id"
   end
 
