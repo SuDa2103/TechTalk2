@@ -5,7 +5,7 @@ class PublicController < ApplicationController
   end
 
   def profile
-    @profile = User.find_by_username params[:username]
+    @profile = User.find_by_username params[:format]
     @posts = @profile.posts
   end
 end
