@@ -4,9 +4,11 @@ class VotesController < ApplicationController
     post_id = params[:post_id]
     vote = Vote.new
     vote.post_id = params[:post_id]
+    vote.upvote = params[:upvote]
     vote.user_id = current_user.id
 
     existing_vote = Vote.where(user_id: current_user.id, post_id: :post_id)
+    @new_vote = existing_vote.size < 1
 
     respond_to do |format|
       format.js {
@@ -18,11 +20,9 @@ class VotesController < ApplicationController
           else
             @success = false
           end
-
-          @post = Post.find(post_id)
-          @total_upvotes = @post.upvotes
-          @total_downvotes = @post.downvotes
         end
+        @post = Post.find(post_id)
+        @is_upvote = params[:upvote]
         render "votes/create"
       }
     end
